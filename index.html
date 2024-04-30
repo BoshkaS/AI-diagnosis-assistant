@@ -16,7 +16,19 @@
         background-color: #007bff;
         color: #fff;
         padding: 10px 0;
+        text-align: center;
       }
+
+      header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        header p {
+            margin: 10px 0 5;
+            font-size: 16px;
+        }
 
       nav ul {
         list-style-type: none;
@@ -166,10 +178,68 @@
           font-size: 12px;
         }
       }
+
+      /* Add animation styles */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .audioButton {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .audioIcon {
+        display: inline-block;
+        width: 30px; /* Adjust size as needed */
+        height: 30px; /* Adjust size as needed */
+        background-image: url('sound_icon.png'); /* Add your sound icon image */
+        background-size: cover;
+      }
+
+      .playing .audioIcon {
+        animation: pulse 1s infinite;
+      }
+
+      section#chat-introduction {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        section#chat-introduction h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        section#chat-introduction p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 16px;
+        }
+
+
     </style>
   </head>
+
   <body>
+    <audio id="first_audio" src="first_audio.mp3" preload="auto"></audio> <!-- Added audio for text -->
+    <audio id="second_audio" src="second_audio.mp3" preload="auto"></audio> <!-- Added audio for text -->
+    <audio id="third_audio" src="third_audio.mp3" preload="auto"></audio> <!-- Added audio for text -->
     <header>
+            <h1>AI Diagnosis Project</h1>
+        <p>Your trusted assistant for accurate healthcare diagnosis</p>
       <nav>
         <ul>
           <li>
@@ -182,9 +252,9 @@
     </header>
 
     <main>
-      <section id="medical_professionals">
+    <section id="medical_professionals">
         <h2>Revolutionize Healthcare with Our AI Diagnosis Assistant</h2>
-        <p>
+         <p onclick="playAudio('first_audio')"> 
           As a medical professional, you understand the importance of accurate
           and timely diagnosis. Our AI Diagnosis Assistant integrates seamlessly
           into your workflow, providing you with advanced tools to enhance
@@ -193,12 +263,13 @@
           delivery. Explore how our technology can empower you to provide better
           patient outcomes.
         </p>
-        <img src=/images/healthcare1.jpg alt="Medical Professionals Image">
-      </section>
+        <button onclick="playAudio('first_audio')" id="playButton1"class="audioButton"><span class="audioIcon"></span></button>
+        <img src="healthcare1.jpg" alt="Medical Professionals Image">
+    </section>
 
-      <section id="practice_managers">
+    <section id="practice_managers">
         <h2>Empower Your Practice with AI-Powered Healthcare Diagnosis</h2>
-        <p>
+        <p onclick="playAudio('second_audio')"> 
           Practice managers play a crucial role in ensuring the efficient
           operation of healthcare facilities. Our AI-Powered Healthcare
           Diagnosis solution offers practical benefits for your practice. By
@@ -207,12 +278,13 @@
           focus on delivering quality care. Discover how our technology can
           streamline your practice operations and enhance overall efficiency.
         </p>
-        <img src=/images/healthcare2.jpg alt="Medical Professionals Image">
-      </section>
+        <button onclick="playAudio('second_audio')" id="playButton2"class="audioButton"><span class="audioIcon"></span></button>
+        <img src="healthcare2.jpg" alt="Medical Professionals Image">
+    </section>
 
-      <section id="potential_patients">
+    <section id="potential_patients">
         <h2>Experience Precision Diagnosis with Our AI Healthcare Companion</h2>
-        <p>
+        <p onclick="playAudio('third_audio')"> 
           Are you seeking precision and reliability in your healthcare journey?
           Our AI Healthcare Companion is here to guide you. Experience
           personalized diagnosis and treatment recommendations tailored to your
@@ -221,20 +293,43 @@
           healthcare with our AI-powered companion and embark on a journey
           towards better well-being today.
         </p>
-        <img src=/images/healthcare3.jpg alt="Medical Professionals Image">
-      </section>
-      <section id="chat-section">
-        <h2>Assistant Chatbot that helps you with your diagnosis</h2>
+        <button onclick="playAudio('third_audio')"id="playButton3"class="audioButton"><span class="audioIcon"></span></button>
+        <img src="healthcare3.jpg" alt="Medical Professionals Image">
+    </section>
+    <section id="chat-introduction">
+            <h2>Introducing Our Assistant Chatbot</h2>
+            <p>Our AI-powered chatbot is designed to assist you with your diagnosis process. With its advanced algorithms and extensive medical knowledge base, the chatbot can provide you with personalized recommendations and answers to your healthcare questions. Whether you're a medical professional, a practice manager, or a potential patient, our chatbot is here to streamline your healthcare journey and provide you with the information you need.</p>
+        </section>
+     <section id="chat-section">
+        <h2>Assistant Chatbot that can help you with your diagnosis</h2>
         <ul id="chat"></ul>
         <input id="input" />
         <button id="button">Send</button>
         <script src="./chat.js"></script>
-      </section>
-    </main>
+    </section>
+</main>
 
-    <footer>
-      <p>Contact us: example@email.com | Follow us: [Social Media Icons]</p>
-      <p>&copy; 2024 AI Diagnosis Assistant</p>
-    </footer>
-  </body>
+<footer>
+    <p>Contact us: healthcare_assistant@gmail.com | Follow us</p>
+    <p>&copy; 2024 AI Diagnosis Assistant</p>
+</footer>
+
+<script>
+    function playAudio(audioId) {
+    var audio = document.getElementById(audioId);
+    var button = document.getElementById('playButton' + audioId.charAt(audioId.length - 1));
+    
+    if (audio.paused) {
+        audio.play();
+        button.classList.add('playing');
+    } else {
+        audio.pause();
+        audio.currentTime = 0;
+        button.classList.remove('playing');
+    }
+}
+
+</script>
+
+</body>
 </html>
