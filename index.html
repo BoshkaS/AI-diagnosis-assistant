@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="chat.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Diagnosis Assistant</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 0;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        background-color: #0056b3;
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+
+      section {
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 24px;
+      }
+
+      p {
+        line-height: 1.6;
+        color: #555;
+        font-size: 16px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0;
+      }
+
+      /* Media Queries */
+      @media only screen and (max-width: 768px) {
+        h2 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      #chat-section {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      ul#chat {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 20px;
+        max-height: 300px; /* Set a max height for the chat area */
+        overflow-y: auto; /* Enable vertical scroll if content exceeds max height */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        padding: 10px;
+      }
+
+      ul#chat li {
+        margin-bottom: 10px;
+      }
+
+      input#input {
+        width: calc(100% - 70px);
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button#button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Media Queries */
+      @media only screen and (max-width: 768px) {
+        input#input {
+          width: calc(100% - 50px);
+        }
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        color: #333;
+        padding: 20px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      footer p {
+        margin-bottom: 10px;
+      }
+
+      footer a {
+        color: #007bff;
+        text-decoration: none;
+        margin-left: 5px;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Media Queries */
+      @media only screen and (max-width: 768px) {
+        footer p {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="#medical_professionals">For Medical Professionals</a>
+          </li>
+          <li><a href="#practice_managers">For Practice Managers</a></li>
+          <li><a href="#potential_patients">For Potential Patients</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="medical_professionals">
+        <h2>Revolutionize Healthcare with Our AI Diagnosis Assistant</h2>
+        <p>
+          As a medical professional, you understand the importance of accurate
+          and timely diagnosis. Our AI Diagnosis Assistant integrates seamlessly
+          into your workflow, providing you with advanced tools to enhance
+          patient care. From assisting in complex diagnoses to streamlining
+          routine tasks, our AI-powered solution revolutionizes healthcare
+          delivery. Explore how our technology can empower you to provide better
+          patient outcomes.
+        </p>
+        <img src=/images/healthcare1.jpg alt="Medical Professionals Image">
+      </section>
+
+      <section id="practice_managers">
+        <h2>Empower Your Practice with AI-Powered Healthcare Diagnosis</h2>
+        <p>
+          Practice managers play a crucial role in ensuring the efficient
+          operation of healthcare facilities. Our AI-Powered Healthcare
+          Diagnosis solution offers practical benefits for your practice. By
+          automating administrative tasks, optimizing resource allocation, and
+          improving patient satisfaction, our platform empowers your team to
+          focus on delivering quality care. Discover how our technology can
+          streamline your practice operations and enhance overall efficiency.
+        </p>
+        <img src=/images/healthcare2.jpg alt="Medical Professionals Image">
+      </section>
+
+      <section id="potential_patients">
+        <h2>Experience Precision Diagnosis with Our AI Healthcare Companion</h2>
+        <p>
+          Are you seeking precision and reliability in your healthcare journey?
+          Our AI Healthcare Companion is here to guide you. Experience
+          personalized diagnosis and treatment recommendations tailored to your
+          unique needs. Our user-friendly interface empowers you to take control
+          of your health while providing peace of mind. Discover the future of
+          healthcare with our AI-powered companion and embark on a journey
+          towards better well-being today.
+        </p>
+        <img src=/images/healthcare3.jpg alt="Medical Professionals Image">
+      </section>
+      <section id="chat-section">
+        <h2>Assistant Chatbot that helps you with your diagnosis</h2>
+        <ul id="chat"></ul>
+        <input id="input" />
+        <button id="button">Send</button>
+        <script src="./chat.js"></script>
+      </section>
+    </main>
+
+    <footer>
+      <p>Contact us: example@email.com | Follow us: [Social Media Icons]</p>
+      <p>&copy; 2024 AI Diagnosis Assistant</p>
+    </footer>
+  </body>
+</html>
