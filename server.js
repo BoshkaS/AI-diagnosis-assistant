@@ -96,8 +96,22 @@ app.get("/", (req, res) => {
 app.post("/reviews", async (req, res) => {
   const { content } = req.body;
   try {
+    // Save the review to the database
     const result = await pool.query("INSERT INTO reviews (content) VALUES ($1) RETURNING *", [content]);
-    res.status(201).json(result.rows[0]);
+
+    // Analyze the review using OpenAI's API
+    // const analysis = await openai.classification.create({
+    //   model: "text-davinci-003",
+    //   examples: [
+    //     ["positive", "This product is fantastic, it exceeded my expectations!"],
+    //     ["negative", "I'm disappointed with this product, it doesn't work as advertised."],
+    //     ["neutral", "The product is okay, but nothing special."],
+    //   ],
+    //   query: content,
+    // });
+
+    // Return the analysis along with the saved review
+    res.status(201).json({ review: result.rows[0] });
   } catch (error) {
     console.error("Error inserting review:", error);
     res.status(500).json({ error: error.message }); // Return error message to client
@@ -106,13 +120,17 @@ app.post("/reviews", async (req, res) => {
 
 app.get("/reviews", async (req, res) => {
   try {
+    // Fetch all reviews from the database
     const result = await pool.query("SELECT * FROM reviews");
+
+    // Return reviews to the client
     res.json(result.rows);
   } catch (error) {
     console.error("Error fetching reviews:", error);
     res.status(500).json({ error: error.message }); // Return error message to client
   }
 });
+
 
 
 
