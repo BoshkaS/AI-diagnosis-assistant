@@ -33,9 +33,14 @@ const history = [
 ];
 
 const imagesPath = path.join(__dirname, 'images');
+const audioPath = path.join(__dirname, 'audio'); // Add this line for audio directory
 
-// Serve static files from the images folder
+// Serve static files from the 'images' directory
 app.use('/images', express.static(imagesPath));
+
+// Serve static files from the 'audio' directory
+app.use('/audio', express.static(audioPath));
+
 
 // Route to serve images based on the image name in the URL
 app.get('/get-image', (req, res) => {
