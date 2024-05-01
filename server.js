@@ -1,10 +1,18 @@
 const express = require("express");
 const path = require("path");
 const OpenAI = require("openai");
+const { Pool } = require("pg");
 
 // Create an Express application
 const app = express();
 const port = 2000; // Port number on which server will run
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "AIproject",
+  password: "Vitavika2004",
+  port: 5432,
+});
 
 const openai = new OpenAI({
     baseURL: 'http://localhost:1234/v1',
@@ -60,6 +68,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+
 app.get("/chat.js", (req, res) => {
   // Send index.html as the response
   res.sendFile(path.join(__dirname, "chat.js"));
@@ -76,6 +85,36 @@ app.post("/message", async (req, res) => {
 app.get("/message", (req, res) => {
   return res.send(history.slice(1));
 });
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.post("/reviews", async (req, res) => {
+  const { content } = req.body;
+  try {
+    const result = await pool.query("INSERT INTO reviews (content) VALUES ($1) RETURNING *", [content]);
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error("Error inserting review:", error);
+    res.status(500).json({ error: error.message }); // Return error message to client
+  }
+});
+
+app.get("/reviews", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM reviews");
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({ error: error.message }); // Return error message to client
+  }
+});
+
+
 
 // Start the server
 app.listen(port, () => {

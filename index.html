@@ -2,6 +2,21 @@
 <html lang="en">
   <head>
     <script src="chat.js" defer></script>
+    <script>
+    function playAudio(audioId) {
+  var audio = document.getElementById(audioId);
+  var button = document.getElementById('playButton' + audioId.charAt(audioId.length - 1));
+  
+  if (audio.paused) {
+      audio.play();
+      button.classList.add('playing');
+  } else {
+      audio.pause();
+      audio.currentTime = 0;
+      button.classList.remove('playing');
+  }
+}
+</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI Diagnosis Assistant</title>
@@ -228,6 +243,50 @@
             color: #555;
             font-size: 16px;
         }
+        
+        .chat-section {
+          background-color: #f5f5f5;
+          padding: 20px;
+          border-radius: 10px;
+          margin-bottom: 40px;
+        }
+
+        .chat-section h2 {
+          color: #333;
+          margin-bottom: 10px;
+        }
+
+        .chat-section p {
+          line-height: 1.6;
+          color: #555;
+          font-size: 16px;
+        }
+
+        .chat-section form {
+          margin-top: 20px;
+        }
+
+        .chat-section textarea {
+          width: calc(100% - 20px);
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        .chat-section button {
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .chat-section button:hover {
+          background-color: #0056b3;
+        }
+
 
 
     </style>
@@ -237,6 +296,36 @@
     <audio id="first_audio" src="audio/first_audio.mp3" preload="auto"></audio>
     <audio id="second_audio" src="audio/second_audio.mp3" preload="auto"></audio>
     <audio id="third_audio" src="audio/third_audio.mp3" preload="auto"></audio>
+    <script>
+        function submitReview() {
+            const reviewInput = document.getElementById('reviewInput').value;
+
+            // Make a POST request to your backend to submit the review
+            fetch('/reviews', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: reviewInput })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to submit review');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle successful review submission (if needed)
+                console.log('Review submitted successfully:', data);
+                // You can update UI or display a success message here
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error submitting review:', error);
+                // You can update UI or display an error message here
+            });
+        }
+    </script>
     <header>
             <h1>AI Diagnosis Project</h1>
         <p>Your trusted assistant for accurate healthcare diagnosis</p>
@@ -307,6 +396,19 @@
         <button id="button">Send</button>
         <script src="./chat.js"></script>
     </section>
+
+    <section id="reviews" class="chat-section">
+  <h2>Reviews</h2>
+  <p>Share your experience with us! We value your feedback and strive to continuously improve our services.</p>
+  <form id="reviewForm">
+    <textarea id="reviewInput" placeholder="Write your review here"></textarea>
+    <button type="button" onclick="submitReview()">Submit Review</button>
+  </form>
+  <ul id="reviewList"></ul>
+</section>
+
+
+
 </main>
 
 <footer>
@@ -314,22 +416,7 @@
     <p>&copy; 2024 AI Diagnosis Assistant</p>
 </footer>
 
-<script>
-    function playAudio(audioId) {
-    var audio = document.getElementById(audioId);
-    var button = document.getElementById('playButton' + audioId.charAt(audioId.length - 1));
-    
-    if (audio.paused) {
-        audio.play();
-        button.classList.add('playing');
-    } else {
-        audio.pause();
-        audio.currentTime = 0;
-        button.classList.remove('playing');
-    }
-}
-
-</script>
+ <script src="chat.js"></script>
 
 </body>
 </html>
