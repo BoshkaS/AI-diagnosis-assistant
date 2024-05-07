@@ -68,6 +68,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// // Define a route for serving posts.html
+// app.get("/posts.html", (req, res) => {
+//   // Send posts.html as the response
+//   res.sendFile(path.join(__dirname, "posts.html"));
+// });
+
 
 app.get("/chat.js", (req, res) => {
   // Send index.html as the response
@@ -131,7 +137,44 @@ app.get("/reviews", async (req, res) => {
   }
 });
 
+const ejs = require('ejs'); // Require EJS module
 
+app.get("/posts", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM posts");
+    const posts = result.rows;
+
+    // Render the posts.html template with the fetched posts data
+    ejs.renderFile(path.join(__dirname, "posts.html"), { posts }, (err, html) => {
+      if (err) {
+        console.error("Error rendering posts.html:", err);
+        return res.status(500).send("Error rendering posts.html");
+      }
+      res.send(html);
+    });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).send("Error fetching posts");
+  }
+});
+
+
+
+
+// Route to get a specific post by its slug
+app.get("/posts/:slug", async (req, res) => {
+  const { slug } = req.params;
+  try {
+      const result = await pool.query("SELECT * FROM posts WHERE slug = $1", [slug]);
+      if (result.rows.length === 0) {
+          return res.status(404).json({ error: "Post not found" });
+      }
+      res.json(result.rows[0]);
+  } catch (error) {
+      console.error("Error fetching post:", error);
+      res.status(500).json({ error: error.message });
+  }
+});
 
 
 // Start the server

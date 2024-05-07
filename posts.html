@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Blog</title>
+    <!-- Include your CSS file for styling -->
+    <style>
+        /* Paste the CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        header p {
+            margin: 10px 0 5;
+            font-size: 16px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 16px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 768px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        /* Add the remaining CSS styles here */
+        #chat-section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        ul#chat {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+            max-height: 300px; /* Set a max height for the chat area */
+            overflow-y: auto; /* Enable vertical scroll if content exceeds max height */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        ul#chat li {
+            margin-bottom: 10px;
+        }
+
+        input#input {
+            width: calc(100% - 70px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button#button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 768px) {
+            input#input {
+                width: calc(100% - 50px);
+            }
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 768px) {
+            footer p {
+                font-size: 12px;
+            }
+        }
+
+        /* Add animation styles */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .audioButton {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .audioIcon {
+            display: inline-block;
+            width: 30px; /* Adjust size as needed */
+            height: 30px; /* Adjust size as needed */
+            background-image: url('images/sound_icon.png'); /* Add your sound icon image */
+            background-size: cover;
+        }
+
+        .playing .audioIcon {
+            animation: pulse 1s infinite;
+        }
+
+        section#chat-introduction {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        section#chat-introduction h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        section#chat-introduction p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .chat-section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .chat-section h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .chat-section p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .chat-section form {
+            margin-top: 20px;
+        }
+
+        .chat-section textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chat-section button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-section button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Navigation menu -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="posts.html">Blog</a></li> <!-- Link to your new blog page -->
+                <!-- Add other menu items as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Posts</h1>
+    <% posts.forEach(post => { %>
+        <article>
+            <h2><%= post.title %></h2>
+            <p>Date: <%= post.date %></p>
+            <p>Author: <%= post.author %></p>
+            <p><%= post.content %></p>
+        </article>
+    <% }); %>
+    <script src="frontend.js"></script> 
+    <script src="server.js"></script>
+
+    <footer>
+    <p>Contact us: healthcare_assistant@gmail.com | Follow us</p>
+    <p>&copy; 2024 AI Diagnosis Assistant</p>
+    </footer>
+</html>
