@@ -10,8 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
-    "openai": "^4.38.3",
+    "openai": "^4.40.0",
     "path": "^0.12.7",
-    "pg": "^8.11.5"
+    "pg": "^8.11.5",
+    "readline-sync": "^1.4.10"
   }
 }
